@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css" type="text/css" />
   </head>
   <body>
+    <div class="nav-bar"></div>
     <div id="app">
       <div class="product">
         <div class="product-image">
@@ -15,6 +16,9 @@
         <div class="product-info">
           <h1>{{ product }}</h1>
           <p>{{ description }}</p>
+          <p v-if="inStock">In Stock</p>
+          <p v-else>Out of Stock</p>
+          <span v-show="onSale">On Sale!</span>
           <p><a :href="vmLink">Based on: Introduction to Vue.js</a></p>
         </div>
     </div>
