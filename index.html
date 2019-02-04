@@ -19,6 +19,22 @@
           <p v-if="inStock">In Stock</p>
           <p v-else>Out of Stock</p>
           <span v-show="onSale">On Sale!</span>
+
+          <p>Details:</p>
+          <ul>
+            <li v-for="detail in details">{{ detail }}</li>
+          </ul>
+
+          <p>Colors:</p>
+          <div v-for="variant in variants" :key="variant.variantId">
+            <p>{{ variant.variantColor }}</p>
+          </div>
+
+          <p>Sizes:</p>
+          <ul>
+            <li v-for="size in sizes">{{ size }}</li>
+          </ul>
+
           <p><a :href="vmLink">Based on: Introduction to Vue.js</a></p>
         </div>
     </div>

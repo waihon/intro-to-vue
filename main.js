@@ -7,6 +7,18 @@ var app = new Vue({
     altText: "A pair of socks",
     vmLink: "https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance",
     inStock: true,
-    onSale: true
+    onSale: true,
+    details: ["80% cotton", "20% polyester", "Gender-neutral"],
+    variants: [
+      {
+        variantId: 2234,
+        variantColor: "green"
+      },
+      {
+        variantId: 2235,
+        variantColor: "blue"
+      }
+    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"]
   }
 });
