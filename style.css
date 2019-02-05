@@ -33,6 +33,10 @@
     width: 50%;
   }
   
+  .out-of-stock {
+    text-decoration: line-through;
+  }
+
   .color-box {
     width: 40px;
     height: 40px;
