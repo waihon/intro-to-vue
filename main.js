@@ -17,6 +17,10 @@ Vue.component('product', {
     premium: {
       type: Boolean,
       required: true
+    },
+    cart: {
+      type: Array,
+      required: true
     }
   },
   template: `
@@ -33,16 +37,13 @@ Vue.component('product', {
         <p>{{ sale }}</p>
         <p>Shipping: {{ shipping }}</p>
 
-        <p>Details:</p>
+        <h2>Details:</h2>
         <product-details :details="details"></product-details>
 
-        <p>Colors:</p>
-        <div class="color-box"
-          v-for="(variant, index) in variants"
-          :key="variant.variantId"
-          :style="{ backgroundColor: variant.variantColor }"
-          @mouseover="updateProduct(index)"
-          >
+        <h3>Colors:</h3>
+        <div v-for="(variant, index) in variants" :key="variant.variantId">
+          <div class="color-box" :style="{ backgroundColor: variant.variantColor }"
+            @mouseover="updateProduct(index)"></div>
         </div>
 
         <p>Sizes:</p>
@@ -57,15 +58,11 @@ Vue.component('product', {
           Add to cart
         </button>
         <button v-on:click="removeFromCart"
-          :disabled="!inStock || cart == 0"
-          :class="{ disabledButton: !inStock || cart == 0 }"
+          :disabled="!inStock || this.cart.length == 0"
+          :class="{ disabledButton: !inStock || this.cart.length == 0 }"
           >
           Remove from Cart
         </button>
-
-        <div class="cart">
-          <p>Cart({{ cart }})</p>
-        </div>
 
         <p><a :href="vmLink">Based on: Introduction to Vue.js</a></p>
       </div>
@@ -92,20 +89,19 @@ Vue.component('product', {
           variantId: 2235,
           variantColor: "blue",
           variantImage: "./assets/vmSocks-blue.jpg",
-          variantQuantity: 0
+          variantQuantity: 3
         }
       ],
       sizes: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
-      cart: 0
     }
   },
   methods: {
     addToCart() {
-      this.cart += 1;
+      this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
     },
     removeFromCart() {
-      if (this.inStock && this.cart > 0) {
-        this.cart -= 1;
+      if (this.inStock && this.cart.length > 0) {
+        this.$emit('remove-from-cart', this.variants[this.selectedVariant].variantId);
       }
     },
     updateProduct(index) {
@@ -144,6 +140,15 @@ Vue.component('product', {
 var app = new Vue({
   el: "#app",
   data: {
-    premium: false
+    premium: false,
+    cart: []
+  },
+  methods: {
+    updateCart(id) {
+      this.cart.push(id);
+    },
+    removeItem(id) {
+      this.cart.splice(this.cart.lastIndexOf(id), 1);
+    }
   }
 });
