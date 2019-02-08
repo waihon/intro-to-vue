@@ -300,7 +300,7 @@ Vue.component('product', {
       } else {
         saleText = 'are not on sale'
       }
-      return this.brand + ' ' + this.product + ' ' + saleText;
+      return this.title + ' ' + saleText;
     },
     shipping() {
       if (this.premium) {
