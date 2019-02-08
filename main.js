@@ -266,7 +266,7 @@ Vue.component('product', {
           variantQuantity: 3
         }
       ],
-      sizes: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
+      sizes: ["S", "M", "L", "XL"],
       reviews: []
     }
   },
